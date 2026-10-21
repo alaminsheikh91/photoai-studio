@@ -1,4 +1,6 @@
-<!doctype html>
+from pathlib import Path
+
+html = r'''<!doctype html>
 <html lang="bn">
 <head>
 <meta charset="utf-8">
@@ -8,107 +10,133 @@
 <style>
 :root{color-scheme:dark;--bg:#0b1020;--panel:#131b2f;--panel2:#18233b;--text:#f4f7ff;--muted:#a9b4cc;--accent:#7c6cff;--line:#293550}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#182447 0,#0b1020 55%);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--text);min-height:100vh}
-.wrap{max-width:1100px;margin:auto;padding:24px 16px 50px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.wrap{max-width:1120px;margin:auto;padding:24px 16px 50px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
 .brand{font-size:1.35rem;font-weight:800;letter-spacing:-.04em}.brand span{color:#a99fff}.privacy{font-size:.82rem;color:#b8f4d4;background:#12352d;border:1px solid #24634e;padding:7px 11px;border-radius:99px}
-.hero{text-align:center;padding:18px 0 28px}.hero h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.05;margin:0 0 14px;letter-spacing:-.055em}.hero p{max-width:680px;margin:0 auto;color:var(--muted);line-height:1.7}
-.upload{display:block;max-width:720px;margin:24px auto 18px;padding:26px 18px;text-align:center;border:1px dashed #6676a0;background:#111a2e;border-radius:20px;cursor:pointer}
+.hero{text-align:center;padding:16px 0 24px}.hero h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.08;margin:0 0 12px;letter-spacing:-.045em}.hero p{max-width:700px;margin:0 auto;color:var(--muted);line-height:1.7}
+.upload{display:block;max-width:720px;margin:22px auto 18px;padding:24px 18px;text-align:center;border:1px dashed #6676a0;background:#111a2e;border-radius:20px;cursor:pointer}
 .upload strong{display:block;font-size:1.05rem;margin-bottom:7px}.upload small{color:var(--muted)}input[type=file]{max-width:100%;margin-top:12px}
 .tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:20px 0}
-.tool{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:14px 12px;text-align:left;color:var(--text);cursor:pointer;min-height:98px}
+.tool{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:14px 12px;text-align:left;color:var(--text);cursor:pointer;min-height:100px}
 .tool.active{border-color:#9b90ff;background:#24264c;box-shadow:0 0 0 1px #9b90ff inset}.tool b{display:block;font-size:.95rem;margin-bottom:6px}.tool small{color:var(--muted);line-height:1.4;display:block}
 .workspace{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:16px}
-.panel{background:rgba(19,27,47,.94);border:1px solid var(--line);border-radius:18px;padding:18px;min-width:0}.panel h2{font-size:1.05rem;margin:0 0 14px}.preview{min-height:260px;border-radius:12px;background-color:#e9edf5;background-image:linear-gradient(45deg,#d6dbe5 25%,transparent 25%),linear-gradient(-45deg,#d6dbe5 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#d6dbe5 75%),linear-gradient(-45deg,transparent 75%,#d6dbe5 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.preview img{display:block;max-width:100%;max-height:520px;object-fit:contain}.empty{color:#4b5872;text-align:center;padding:30px}.controls{display:grid;gap:14px}.field label{display:flex;justify-content:space-between;gap:12px;font-size:.9rem;margin-bottom:8px}.field input[type=range],.field select{width:100%}.field select{background:#0d1426;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:750;cursor:pointer;background:var(--accent);color:white}.btn.secondary{background:#27334d;border:1px solid #3a4867}.btn:disabled{opacity:.45;cursor:not-allowed}.status{color:#b9c5df;font-size:.88rem;line-height:1.55;margin-top:13px;min-height:24px}.note{font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:18px}.footer{text-align:center;color:#8290ae;font-size:.8rem;margin-top:24px}
+.panel{background:rgba(19,27,47,.94);border:1px solid var(--line);border-radius:18px;padding:18px;min-width:0}.panel h2{font-size:1.05rem;margin:0 0 14px}.preview{min-height:280px;border-radius:12px;background-color:#e9edf5;background-image:linear-gradient(45deg,#d6dbe5 25%,transparent 25%),linear-gradient(-45deg,#d6dbe5 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#d6dbe5 75%),linear-gradient(-45deg,transparent 75%,#d6dbe5 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.preview img{display:block;max-width:100%;max-height:560px;object-fit:contain}.empty{color:#4b5872;text-align:center;padding:30px}.controls{display:grid;gap:14px}.field label{display:flex;justify-content:space-between;gap:12px;font-size:.9rem;margin-bottom:8px}.field input[type=range],.field select{width:100%}.field select{background:#0d1426;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:750;cursor:pointer;background:var(--accent);color:white}.btn.secondary{background:#27334d;border:1px solid #3a4867}.btn:disabled{opacity:.45;cursor:not-allowed}.status{color:#b9c5df;font-size:.88rem;line-height:1.55;margin-top:13px;min-height:24px}.note{font-size:.8rem;color:var(--muted);line-height:1.6;margin:6px 0 0}.step{border:1px solid #5149a0;background:#1d2040;border-radius:12px;padding:12px;font-size:.9rem;line-height:1.6}.hidden{display:none!important}.footer{text-align:center;color:#8290ae;font-size:.8rem;margin-top:24px}
 @media(max-width:760px){.tools{grid-template-columns:repeat(2,minmax(0,1fr))}.workspace{grid-template-columns:1fr}.preview{min-height:220px}.wrap{padding:17px 12px 36px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header class="top"><div class="brand">✦ PhotoAI <span>Studio</span></div><div class="privacy">🔒 ছবির এডিটিং আপনার ব্রাউজারে</div></header>
-<section class="hero"><h1>আপনার ছবি, আরও সুন্দর</h1><p>ব্যাকগ্রাউন্ড রিমুভ, ছবি উন্নত করা, ন্যাচারাল স্মুথিং এবং পাসপোর্ট সাইজ ছবি—এক জায়গায়। আপনার ছবির ফাইল কোনো নিজস্ব সার্ভারে আপলোড করা হয় না।</p></section>
-<label class="upload"><strong>📷 প্রথমে একটি ছবি বেছে নিন</strong><small>JPG, PNG বা WebP · আপনার ডিভাইস থেকেই ছবি নির্বাচন করুন</small><br><input id="file" type="file" accept="image/png,image/jpeg,image/webp"></label>
+<header class="top"><div class="brand">✦ PhotoAI <span>Studio</span></div><div class="privacy">🔒 ছবি আপনার ব্রাউজারেই প্রসেস হয়</div></header>
+<section class="hero"><h1>এক ছবিতে সব প্রয়োজনীয় এডিট</h1><p>প্রথমে Background Remove করুন, তারপর crop-এর অবস্থান ঠিক করে OK দিলে পাসপোর্ট সাইজ তৈরি হবে। সাধারণ Enhance এবং পুরাতন ছবি উন্নত করার আলাদা টুলও আছে।</p></section>
+<label class="upload"><strong>📷 প্রথমে একটি ছবি বেছে নিন</strong><small>JPG, PNG বা WebP · ছবি আপনার ডিভাইস থেকেই নির্বাচন করুন</small><br><input id="file" type="file" accept="image/png,image/jpeg,image/webp"></label>
 <section class="tools" aria-label="Photo tools">
-<button class="tool active" data-tool="remove"><b>✂ Background Remover</b><small>AI দিয়ে ব্যাকগ্রাউন্ড আলাদা করুন</small></button>
-<button class="tool" data-tool="enhance"><b>✨ Photo Enhancer</b><small>স্পষ্টতা ও কনট্রাস্ট বাড়ান</small></button>
-<button class="tool" data-tool="smooth"><b>◌ Natural Smoothing</b><small>হালকা স্কিন-সফটেনিং ইফেক্ট</small></button>
-<button class="tool" data-tool="passport"><b>▣ Passport Photo</b><small>সাইজ ঠিক করে ছবি ডাউনলোড</small></button>
+<button class="tool active" data-tool="remove"><b>✂ 1. Background Remove</b><small>ব্যাকগ্রাউন্ড সরান, তারপর crop ঠিক করুন</small></button>
+<button class="tool" data-tool="enhance"><b>✨ 2. Photo Enhance</b><small>মুখের গঠন না বদলে আলো ও স্পষ্টতা ঠিক করুন</small></button>
+<button class="tool" data-tool="old"><b>🖼 3. পুরাতন ছবি Enhance</b><small>পুরাতন/ফিকে ছবির আলো, contrast ও রং ঠিক করুন</small></button>
+<button class="tool" data-tool="passport"><b>▣ 4. Passport Crop</b><small>নিজে অবস্থান ঠিক করে পাসপোর্ট সাইজ করুন</small></button>
 </section>
 <section class="workspace">
 <div class="panel"><h2>ছবির প্রিভিউ</h2><div class="preview" id="preview"><div class="empty">এখানে আপনার ছবিটি দেখা যাবে</div></div><div class="actions"><button class="btn secondary" id="reset" disabled>মূল ছবি ফিরিয়ে আনুন</button><button class="btn" id="download" disabled>ছবি ডাউনলোড</button></div></div>
-<div class="panel"><h2 id="toolTitle">AI Background Remover</h2><div id="controls" class="controls"><p class="note">AI মডেলটি প্রথমবার ইন্টারনেট থেকে ডাউনলোড হবে। মডেলটি আপনার ব্রাউজারে রান করবে; ছবি কোনো ব্যাকএন্ড সার্ভারে পাঠানো হবে না।</p></div><div class="actions"><button class="btn" id="apply" disabled>এডিট করুন</button></div><div class="status" id="status" role="status">শুরু করতে একটি ছবি নির্বাচন করুন।</div><p class="note">গোপনীয়তা: এই পেজের নিজস্ব কোনো আপলোড সার্ভার নেই। AI মডেল/CDN ডাউনলোডের সময় ব্রাউজার ইন্টারনেটে অনুরোধ পাঠাবে।</p></div>
+<div class="panel"><h2 id="toolTitle">Background Remove + Passport Crop</h2><div id="controls" class="controls"></div>
+<div id="cropStep" class="hidden">
+<div class="step">ধাপ ২: crop-এর মধ্যে মুখ/মাথা ঠিক জায়গায় আনুন। প্রিভিউ দেখে Zoom ও Vertical position ঠিক করে <b>OK — Passport Size করুন</b> চাপুন।</div>
+<div class="field"><label for="cropZoom">Zoom <span id="cropZoomVal">100%</span></label><input id="cropZoom" type="range" min="100" max="220" value="100"></div>
+<div class="field"><label for="cropY">উপরে/নিচে অবস্থান <span id="cropYVal">50%</span></label><input id="cropY" type="range" min="0" max="100" value="50"></div>
+<div class="field"><label for="cropX">বামে/ডানে অবস্থান <span id="cropXVal">50%</span></label><input id="cropX" type="range" min="0" max="100" value="50"></div>
+<div class="field"><label for="passportSize">পাসপোর্ট সাইজ</label><select id="passportSize"><option value="35x45">35 × 45 mm (413 × 531 px)</option><option value="2x2">2 × 2 inch (600 × 600 px)</option><option value="300x400">300 × 400 px</option><option value="600x600">600 × 600 px</option></select></div>
+<div class="field"><label for="passportBg">Crop-এর ব্যাকগ্রাউন্ড</label><select id="passportBg"><option value="#ffffff">সাদা</option><option value="#dcecff">হালকা নীল</option><option value="#d9d9d9">হালকা ধূসর</option><option value="transparent">স্বচ্ছ (PNG)</option></select></div>
+<div class="actions"><button class="btn" id="cropOk">OK — Passport Size করুন</button><button class="btn secondary" id="cropCancel">বাতিল</button></div>
+</div>
+<div class="actions"><button class="btn" id="apply" disabled>এডিট করুন</button></div><div class="status" id="status" role="status">শুরু করতে একটি ছবি নির্বাচন করুন।</div>
+<p class="note">গুরুত্বপূর্ণ: Face Enhance মুখের গঠন বদলানোর AI ব্যবহার করে না; এটি আলো/কনট্রাস্ট/শার্পনেস ঠিক করে। ফল ছবির মানের ওপর নির্ভর করবে। পুরাতন ছবির tool ক্ষতি হওয়া অংশ নিজে থেকে পুনর্গঠন করতে পারে না।</p>
+<p class="note">গোপনীয়তা: এই পেজের নিজস্ব কোনো আপলোড সার্ভার নেই। AI মডেল প্রথমবার CDN থেকে ডাউনলোড হবে; ছবি ব্রাউজারের মধ্যেই প্রসেস হওয়ার জন্য তৈরি।</p>
+</div>
 </section>
-<div class="footer">PhotoAI Studio · Free browser-based photo tools · প্রথম সংস্করণ</div>
+<div class="footer">PhotoAI Studio · Free browser-based photo tools</div>
 </div>
 <script type="module">
 import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.2';
 env.allowLocalModels = false;
 const $=id=>document.getElementById(id);
-let original=null, current=null, originalFileName='photo', activeTool='remove', remover=null;
-const toolNames={remove:'AI Background Remover',enhance:'Photo Enhancer',smooth:'Natural Face Smoothing',passport:'Passport Photo Maker'};
+let original=null,current=null,baseForCrop=null,originalFileName='photo',activeTool='remove',remover=null;
+const toolNames={remove:'Background Remove + Passport Crop',enhance:'Photo Enhance (face-safe)',old:'পুরাতন ছবি Enhance',passport:'Passport Crop'};
 const toolInfo={
- remove:'<p class="note">AI segmentation মডেল দিয়ে ছবির বিষয়বস্তু আলাদা করা হবে। মডেলটি প্রথমবার ডাউনলোড হতে কিছু সময় লাগতে পারে।</p>',
- enhance:'<div class="field"><label for="sharp">Sharpness <span id="sharpVal">35%</span></label><input id="sharp" type="range" min="0" max="100" value="35"></div><div class="field"><label for="contrast">Contrast <span id="contrastVal">10%</span></label><input id="contrast" type="range" min="0" max="40" value="10"></div><p class="note">এই প্রথম সংস্করণে এটি Canvas-ভিত্তিক enhancement, AI upscaling নয়। পরে ব্রাউজারে চলা upscaling মডেল যোগ করা যাবে।</p>',
- smooth:'<div class="field"><label for="smoothAmt">Smoothing <span id="smoothVal">15%</span></label><input id="smoothAmt" type="range" min="0" max="40" value="15"></div><p class="note">এটি সূক্ষ্ম blur-blend ইফেক্ট; এখনো face detection নেই, তাই পুরো ছবিতে প্রভাব পড়বে। মুখের গঠন বদলাবে না।</p>',
- passport:'<div class="field"><label for="size">ছবির সাইজ</label><select id="size"><option value="35x45">35 × 45 mm (সাধারণ পাসপোর্ট অনুপাত)</option><option value="2x2">2 × 2 inch</option><option value="300x400">300 × 400 px</option><option value="600x600">600 × 600 px</option></select></div><div class="field"><label for="bg">ব্যাকগ্রাউন্ড</label><select id="bg"><option value="#ffffff">সাদা</option><option value="#dcecff">হালকা নীল</option><option value="#d9d9d9">হালকা ধূসর</option></select></div><p class="note">ছবিটি কেন্দ্র করে crop করা হবে। এটি সরকারি বায়োমেট্রিক মাপ/নিয়ম পূরণ নিশ্চিত করে না—জমা দেওয়ার আগে সংশ্লিষ্ট কর্তৃপক্ষের নিয়ম যাচাই করুন।</p>'
+ remove:`<div class="step">ধাপ ১: ব্যাকগ্রাউন্ড সরান। কাজ শেষ হলে crop সেটিংস নিজে থেকেই খুলবে—মুখের অবস্থান ঠিক করে OK দিন।</div>
+ <div class="field"><label for="removeBg">ব্যাকগ্রাউন্ড রিমুভের পর</label><select id="removeBg"><option value="transparent">স্বচ্ছ রাখুন (PNG)</option><option value="#ffffff">সাদা ব্যাকগ্রাউন্ড</option><option value="#dcecff">হালকা নীল ব্যাকগ্রাউন্ড</option><option value="#d9d9d9">হালকা ধূসর ব্যাকগ্রাউন্ড</option></select></div>
+ <p class="note">AI মডেল প্রথমবার লোড হতে সময় লাগতে পারে। ব্যাকগ্রাউন্ড সরানোর পর crop-এর zoom ও অবস্থান ঠিক করার অপশন আসবে।</p>`,
+ enhance:`<div class="field"><label for="enhBright">Brightness <span id="enhBrightVal">5</span></label><input id="enhBright" type="range" min="-20" max="25" value="5"></div>
+ <div class="field"><label for="enhContrast">Contrast <span id="enhContrastVal">10%</span></label><input id="enhContrast" type="range" min="0" max="35" value="10"></div>
+ <div class="field"><label for="enhSharp">Sharpness <span id="enhSharpVal">20%</span></label><input id="enhSharp" type="range" min="0" max="60" value="20"></div>
+ <p class="note">এটি সাধারণ photo enhancement; মুখের আকৃতি/চোখ/নাক/ঠোঁট AI দিয়ে পরিবর্তন করে না। খুব বেশি sharpness দিলে ছবিতে দানা দেখা যেতে পারে।</p>`,
+ old:`<div class="field"><label for="oldBright">Brightness <span id="oldBrightVal">10</span></label><input id="oldBright" type="range" min="-20" max="35" value="10"></div>
+ <div class="field"><label for="oldContrast">Contrast <span id="oldContrastVal">15%</span></label><input id="oldContrast" type="range" min="0" max="45" value="15"></div>
+ <div class="field"><label for="oldSharp">Sharpness <span id="oldSharpVal">15%</span></label><input id="oldSharp" type="range" min="0" max="45" value="15"></div>
+ <div class="field"><label for="oldColor">রং ঠিক করা <span id="oldColorVal">10%</span></label><input id="oldColor" type="range" min="0" max="35" value="10"></div>
+ <p class="note">পুরাতন/ফিকে ছবির brightness, contrast, sharpness ও saturation সামঞ্জস্য করে। ছেঁড়া অংশ, দাগ বা হারানো ডিটেইল AI দিয়ে পুনর্গঠন করে না।</p>`,
+ passport:`<div class="step">ছবির অবস্থান ঠিক করার জন্য crop editor খুলবে। Zoom এবং অবস্থান ঠিক করে OK চাপুন।</div>
+ <p class="note">পাসপোর্টের সাইজ ও background বেছে নিয়ে crop করুন। সরকারি ছবির নিয়ম দেশ/কর্তৃপক্ষভেদে আলাদা হতে পারে।</p>`
 };
 function setStatus(t){$('status').textContent=t}
 function setPreview(src){$('preview').innerHTML='';const img=document.createElement('img');img.src=src;img.alt='Edited photo preview';$('preview').appendChild(img)}
 function dataURL(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob)})}
 function imageFromURL(src){return new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=reject;i.src=src})}
 function setCurrent(url){current=url;setPreview(url);$('download').disabled=false;$('reset').disabled=false}
-$('file').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;if(!f.type.startsWith('image/')){setStatus('অনুগ্রহ করে একটি image ফাইল নির্বাচন করুন।');return}originalFileName=(f.name.replace(/\.[^.]+$/,'')||'photo');original=await dataURL(f);current=original;setPreview(original);$('apply').disabled=false;$('download').disabled=false;$('reset').disabled=false;setStatus('ছবি প্রস্তুত। এখন একটি টুল বেছে নিয়ে “এডিট করুন” চাপুন।')});
-document.querySelectorAll('[data-tool]').forEach(b=>b.addEventListener('click',()=>{activeTool=b.dataset.tool;document.querySelectorAll('[data-tool]').forEach(x=>x.classList.toggle('active',x===b));$('toolTitle').textContent=toolNames[activeTool];$('controls').innerHTML=toolInfo[activeTool];wireSliders();setStatus('টুল নির্বাচন করা হয়েছে।')}));
-function wireSliders(){for(const [id,out,suffix] of [['sharp','sharpVal','%'],['contrast','contrastVal','%'],['smoothAmt','smoothVal','%']]){const el=$(id);if(el)el.addEventListener('input',()=>$(out).textContent=el.value+suffix)}}
-$('reset').addEventListener('click',()=>{if(original){setCurrent(original);setStatus('মূল ছবি ফিরিয়ে আনা হয়েছে।')}});
-$('download').addEventListener('click',async()=>{if(!current)return;const a=document.createElement('a');a.href=current;a.download=originalFileName+'-photoai.png';document.body.appendChild(a);a.click();a.remove()});
+function wireRanges(){
+ const pairs=[['enhBright','enhBrightVal',''],['enhContrast','enhContrastVal','%'],['enhSharp','enhSharpVal','%'],['oldBright','oldBrightVal',''],['oldContrast','oldContrastVal','%'],['oldSharp','oldSharpVal','%'],['oldColor','oldColorVal','%'],['cropZoom','cropZoomVal','%'],['cropY','cropYVal','%'],['cropX','cropXVal','%']];
+ for(const [id,out,suf] of pairs){const el=$(id);if(el)el.addEventListener('input',()=>$(out).textContent=el.value+suf)}
+}
+$('file').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;if(!f.type.startsWith('image/')){setStatus('অনুগ্রহ করে একটি image ফাইল নির্বাচন করুন।');return}
+ originalFileName=f.name.replace(/\.[^.]+$/,'')||'photo';original=await dataURL(f);current=original;baseForCrop=null;setPreview(original);$('apply').disabled=false;$('download').disabled=false;$('reset').disabled=false;$('cropStep').classList.add('hidden');setStatus('ছবি প্রস্তুত। একটি টুল বেছে নিন।')});
+document.querySelectorAll('[data-tool]').forEach(b=>b.addEventListener('click',()=>{activeTool=b.dataset.tool;document.querySelectorAll('[data-tool]').forEach(x=>x.classList.toggle('active',x===b));$('toolTitle').textContent=toolNames[activeTool];$('controls').innerHTML=toolInfo[activeTool];$('cropStep').classList.add('hidden');wireRanges();$('apply').textContent=activeTool==='remove'?'Background Remove করুন':activeTool==='enhance'?'Photo Enhance করুন':activeTool==='old'?'পুরাতন ছবি Enhance করুন':'Crop Editor খুলুন';setStatus('টুল নির্বাচন করা হয়েছে।')}));
+$('reset').addEventListener('click',()=>{if(original){baseForCrop=null;setCurrent(original);$('cropStep').classList.add('hidden');setStatus('মূল ছবি ফিরিয়ে আনা হয়েছে।')}});
+$('download').addEventListener('click',()=>{if(!current)return;const a=document.createElement('a');a.href=current;a.download=originalFileName+'-photoai.png';document.body.appendChild(a);a.click();a.remove()});
+function getDims(size){if(size==='35x45')return [413,531];if(size==='2x2')return [600,600];if(size==='300x400')return [300,400];return [600,600]}
+async function cropImage(src){
+ const img=await imageFromURL(src),[w,h]=getDims($('passportSize').value),zoom=Number($('cropZoom').value)/100,px=Number($('cropX').value)/100,py=Number($('cropY').value)/100;
+ const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d'),bg=$('passportBg').value;
+ if(bg!=='transparent'){ctx.fillStyle=bg;ctx.fillRect(0,0,w,h)}else{ctx.clearRect(0,0,w,h)}
+ const baseScale=Math.max(w/img.naturalWidth,h/img.naturalHeight),scale=baseScale*zoom,dw=img.naturalWidth*scale,dh=img.naturalHeight*scale;
+ const minX=w-dw,minY=h-dh,x=minX*px,y=minY*py;ctx.drawImage(img,x,y,dw,dh);
+ return c.toDataURL(bg==='transparent'?'image/png':'image/jpeg',.94);
+}
 $('apply').addEventListener('click',async()=>{
  if(!original){setStatus('আগে একটি ছবি নির্বাচন করুন।');return}
  $('apply').disabled=true;
  try{
   if(activeTool==='remove'){
-   setStatus('AI মডেল লোড হচ্ছে… প্রথমবার সময় লাগতে পারে।');
-   if(!remover){
-    try { remover=await pipeline('image-segmentation','Xenova/modnet',{device:'webgpu'}); }
-    catch(webgpuError) { remover=await pipeline('image-segmentation','Xenova/modnet',{device:'wasm'}); }
-   }
-   setStatus('AI দিয়ে ব্যাকগ্রাউন্ড আলাদা করা হচ্ছে…');
-   const result=await remover(original);
-   const mask=result?.[0]?.mask;
-   if(!mask)throw new Error('মডেল থেকে mask পাওয়া যায়নি।');
-   const img=await imageFromURL(original), c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;
-   const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0);
-   const pixels=ctx.getImageData(0,0,c.width,c.height);
-   const mw=mask.width,mh=mask.height,md=mask.data;
-   const mc=document.createElement('canvas');mc.width=mw;mc.height=mh;const mctx=mc.getContext('2d');
-   const mid=mctx.createImageData(mw,mh);
-   for(let i=0;i<mw*mh;i++){let v=md.length===mw*mh?md[i]:(md[i*4]??0);if(v<=1)v*=255;mid.data[i*4]=255;mid.data[i*4+1]=255;mid.data[i*4+2]=255;mid.data[i*4+3]=v}
-   mctx.putImageData(mid,0,0);const temp=document.createElement('canvas');temp.width=c.width;temp.height=c.height;const tctx=temp.getContext('2d');tctx.drawImage(mc,0,0,c.width,c.height);
-   const maskPixels=tctx.getImageData(0,0,c.width,c.height).data;
-   for(let i=0;i<c.width*c.height;i++)pixels.data[i*4+3]=maskPixels[i*4+3];
-   ctx.putImageData(pixels,0,0);setCurrent(c.toDataURL('image/png'));setStatus('ব্যাকগ্রাউন্ড রিমুভ সম্পন্ন। PNG হিসেবে ডাউনলোড করুন।');
-  } else if(activeTool==='enhance'){
+   setStatus('AI মডেল লোড হচ্ছে… প্রথমবার কিছু সময় লাগতে পারে।');
+   if(!remover){try{remover=await pipeline('image-segmentation','Xenova/modnet',{device:'webgpu'})}catch(e){remover=await pipeline('image-segmentation','Xenova/modnet',{device:'wasm'})}}
+   setStatus('ব্যাকগ্রাউন্ড আলাদা করা হচ্ছে…');
+   const result=await remover(original),mask=result?.[0]?.mask;if(!mask)throw new Error('AI মডেল থেকে mask পাওয়া যায়নি');
+   const img=await imageFromURL(original),c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0);
+   const pix=ctx.getImageData(0,0,c.width,c.height),mw=mask.width,mh=mask.height,md=mask.data,mc=document.createElement('canvas');mc.width=mw;mc.height=mh;
+   const mctx=mc.getContext('2d'),mid=mctx.createImageData(mw,mh);
+   for(let i=0;i<mw*mh;i++){let v=md.length===mw*mh?md[i]:(md[i*4]??0);if(v<=1)v*=255;mid.data[i*4]=255;mid.data[i*4+1]=255;mid.data[i*4+2]=255;mid.data[i*4+3]=Math.max(0,Math.min(255,v))}
+   mctx.putImageData(mid,0,0);const tmp=document.createElement('canvas');tmp.width=c.width;tmp.height=c.height;tmp.getContext('2d').drawImage(mc,0,0,c.width,c.height);const alpha=tmp.getContext('2d').getImageData(0,0,c.width,c.height).data;
+   for(let i=0;i<c.width*c.height;i++)pix.data[i*4+3]=alpha[i*4+3];ctx.putImageData(pix,0,0);
+   let out=c;
+   const bg=$('removeBg')?.value||'transparent';
+   if(bg!=='transparent'){const bc=document.createElement('canvas');bc.width=c.width;bc.height=c.height;const bctx=bc.getContext('2d');bctx.fillStyle=bg;bctx.fillRect(0,0,bc.width,bc.height);bctx.drawImage(c,0,0);out=bc}
+   baseForCrop=out.toDataURL('image/png');setCurrent(baseForCrop);$('cropStep').classList.remove('hidden');$('cropZoom').value=100;$('cropY').value=50;$('cropX').value=50;wireRanges();setStatus('ব্যাকগ্রাউন্ড রিমুভ হয়েছে। এখন crop-এর অবস্থান ঠিক করে OK চাপুন।');
+  }else if(activeTool==='enhance'||activeTool==='old'){
    const img=await imageFromURL(original),c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;const ctx=c.getContext('2d');
-   const sharp=Number($('sharp')?.value||35),contrast=Number($('contrast')?.value||10);
-   ctx.filter=`contrast(${100+contrast}%) saturate(105%)`;ctx.drawImage(img,0,0);
-   if(sharp>0){const src=ctx.getImageData(0,0,c.width,c.height),out=ctx.createImageData(c.width,c.height),d=src.data,o=out.data,k=sharp/100*.45;o.set(d);
-    for(let y=1;y<c.height-1;y++)for(let x=1;x<c.width-1;x++){const i=(y*c.width+x)*4;for(let ch=0;ch<3;ch++){const avg=(d[i-4+ch]+d[i+4+ch]+d[i-c.width*4+ch]+d[i+c.width*4+ch])/4;o[i+ch]=Math.max(0,Math.min(255,d[i+ch]+(d[i+ch]-avg)*k))}o[i+3]=d[i+3]}
-    ctx.putImageData(out,0,0)}
-   setCurrent(c.toDataURL('image/png'));setStatus('ছবি উন্নত করা হয়েছে। এটি সাধারণ image processing, AI upscaling নয়।');
-  } else if(activeTool==='smooth'){
-   const img=await imageFromURL(original),c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;const ctx=c.getContext('2d'),amount=Number($('smoothAmt')?.value||15);
-   ctx.drawImage(img,0,0);if(amount>0){ctx.globalAlpha=amount/100;ctx.filter=`blur(${Math.max(.2,amount/18)}px)`;ctx.drawImage(img,0,0);ctx.filter='none';ctx.globalAlpha=1}
-   setCurrent(c.toDataURL('image/png'));setStatus('স্মুথিং ইফেক্ট প্রয়োগ হয়েছে। এটি পুরো ছবিতে প্রভাব ফেলে।');
-  } else if(activeTool==='passport'){
-   const img=await imageFromURL(original),size=$('size').value,bg=$('bg').value;let w,h;
-   if(size==='35x45'){w=413;h=531}else if(size==='2x2'){w=600;h=600}else if(size==='300x400'){w=300;h=400}else{w=600;h=600}
-   const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
-   const scale=Math.max(w/img.naturalWidth,h/img.naturalHeight),dw=img.naturalWidth*scale,dh=img.naturalHeight*scale;ctx.drawImage(img,(w-dw)/2,(h-dh)/2,dw,dh);
-   setCurrent(c.toDataURL('image/jpeg',.94));setStatus(`ছবি ${w} × ${h} px আকারে তৈরি হয়েছে। প্রয়োজন হলে crop/position আরও ঠিক করুন।`);
+   const isOld=activeTool==='old',bright=Number($(isOld?'oldBright':'enhBright').value),contrast=Number($(isOld?'oldContrast':'enhContrast').value),sharp=Number($(isOld?'oldSharp':'enhSharp').value),color=isOld?Number($('oldColor').value):5;
+   ctx.filter=`brightness(${100+bright}%) contrast(${100+contrast}%) saturate(${100+color}%)`;ctx.drawImage(img,0,0);ctx.filter='none';
+   if(sharp>0&&c.width>2&&c.height>2){const src=ctx.getImageData(0,0,c.width,c.height),out=ctx.createImageData(c.width,c.height),d=src.data,o=out.data,k=sharp/100*.45;o.set(d);
+    for(let y=1;y<c.height-1;y++)for(let x=1;x<c.width-1;x++){const i=(y*c.width+x)*4;for(let ch=0;ch<3;ch++){const avg=(d[i-4+ch]+d[i+4+ch]+d[i-c.width*4+ch]+d[i+c.width*4+ch])/4;o[i+ch]=Math.max(0,Math.min(255,d[i+ch]+(d[i+ch]-avg)*k))}o[i+3]=d[i+3]}ctx.putImageData(out,0,0)}
+   setCurrent(c.toDataURL('image/png'));setStatus(isOld?'পুরাতন ছবির আলো, contrast ও রং সামঞ্জস্য করা হয়েছে।':'Photo Enhance হয়েছে। মুখের গঠন বদলানোর কোনো AI ব্যবহার করা হয়নি।');
+  }else if(activeTool==='passport'){
+   baseForCrop=current||original;setCurrent(baseForCrop);$('cropStep').classList.remove('hidden');wireRanges();setStatus('Crop editor খুলেছে। অবস্থান ঠিক করে OK চাপুন।');
   }
- }catch(err){console.error(err);setStatus('এডিট করা যায়নি: '+(err?.message||'অজানা সমস্যা')+'. AI মডেলের জন্য WebGPU সমর্থিত ব্রাউজার প্রয়োজন হতে পারে।')}
+ }catch(err){console.error(err);setStatus('এডিট করা যায়নি: '+(err?.message||'অজানা সমস্যা')+'. ইন্টারনেট সংযোগ/ব্রাউজার সাপোর্ট পরীক্ষা করুন।')}
  finally{$('apply').disabled=false}
 });
+$('cropOk').addEventListener('click',async()=>{try{if(!baseForCrop)baseForCrop=current||original;if(!baseForCrop)return;setStatus('পাসপোর্ট crop তৈরি হচ্ছে…');$('cropOk').disabled=true;const out=await cropImage(baseForCrop);setCurrent(out);$('cropStep').classList.add('hidden');setStatus('OK! পাসপোর্ট সাইজ তৈরি হয়েছে। Download চাপুন।')}catch(e){setStatus('Crop করা যায়নি: '+e.message)}finally{$('cropOk').disabled=false}});
+$('cropCancel').addEventListener('click',()=>{$('cropStep').classList.add('hidden');setStatus('Crop বাতিল করা হয়েছে।')});
 </script>
 </body>
-</html>
+</html>'''
+path = Path("/mnt/data/photoai-studio-v2.html")
+path.write_text(html, encoding="utf-8")
+print(f"Updated website file created: {path} ({path.stat().st_size:,} bytes)")
